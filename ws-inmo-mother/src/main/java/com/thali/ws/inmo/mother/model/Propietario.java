@@ -16,10 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Thaliana
@@ -27,10 +25,8 @@ import lombok.ToString;
  */
 @Table(name = "PROPIETARIOS")
 @Entity
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
+@Data
+@NoArgsConstructor
 public class Propietario implements Serializable {
 
 	@Id
@@ -41,20 +37,23 @@ public class Propietario implements Serializable {
 	@Column(name = "NUMERO_IDENTIFICACION", length = 20, nullable = false)
 	private String numeroIdentificacion;
 	
-	@Column(name = "NOMBRES", length = 40, nullable = false)
+	@Column(name = "NOMBRES", length = 60, nullable = false)
 	private String nombres;
 	
-	@Column(name = "APELLIDOS", length = 40)
+	@Column(name = "APELLIDOS", length = 60)
 	private String apellidos;
 	
 	@Column(name = "CORREO", length = 80)
 	private String correo;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="propietario", cascade=CascadeType.ALL)
-	private List<PropietarioDireccion> direcciones;
+	private List<DireccionPropietario> direcciones;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="propietario", cascade=CascadeType.ALL)
-	private List<PropietarioTelefono> telefonos;
+	private List<TelefonoPropietario> telefonos;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "propietario", cascade = CascadeType.ALL)
+	private List<PredioPropietario> predios;
 	
 	/**
 	 * 

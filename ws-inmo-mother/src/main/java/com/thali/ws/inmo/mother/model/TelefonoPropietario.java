@@ -15,22 +15,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Thaliana
  *
  */
-@Table(name = "PROPIETARIO_TELEFONOS")
+@Table(name = "TELEFONOS_PROPIETARIO")
 @Entity
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-public class PropietarioTelefono implements Serializable {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class TelefonoPropietario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,10 +39,10 @@ public class PropietarioTelefono implements Serializable {
 	private Integer numeroTefono;
 
 	@Column(name = "NOTA", length = 15)
-	private String NOTA;
+	private String nota;
 
 	@ManyToOne
-	@JoinColumn(name = "CODIGO_PROPIETARIO", foreignKey = @ForeignKey(name = "FK_PROPIETARIO_TELEFONO"), nullable = false)
+	@JoinColumn(name = "CODIGO_PROPIETARIO", foreignKey = @ForeignKey(name = "FK_TELEFONO_PROPIETARIO"), nullable = false)
 	private Propietario propietario;
 
 	/**
