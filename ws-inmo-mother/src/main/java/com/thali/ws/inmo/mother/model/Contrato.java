@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.thali.ws.inmo.mother.model;
 
 import java.io.Serializable;
@@ -41,6 +38,9 @@ public class Contrato implements Serializable {
 
 	@Column(name = "FECHA_FINAL", nullable = false)
 	private LocalDate fechaFINAL;
+	
+	@Column(name = "FECHA_PAGOS", nullable = false)
+	private LocalDate fechaPagos;
 
 	@Column(name = "PAGO_MENSUAL", nullable = false)
 	private Long pagoMensual;
@@ -49,15 +49,15 @@ public class Contrato implements Serializable {
 	private String descripcionCondicion;
 
 	@ManyToOne
-	@JoinColumn(name = "CODIGO_PROPIETARIO", foreignKey = @ForeignKey(name = "FK_CONTRATO_PROPIETARIO"), nullable = false)
+	@JoinColumn(name = "CODIGO_PROPIETARIO", unique = true, foreignKey = @ForeignKey(name = "FK_CONTRATO_PROPIETARIO"), nullable = false)
 	private Propietario propietario;
 
 	@ManyToOne
-	@JoinColumn(name = "CODIGO_ARRENDATARIO", foreignKey = @ForeignKey(name = "FK_CONTRATO_ARRENDATARIO"), nullable = false)
+	@JoinColumn(name = "CODIGO_ARRENDATARIO", unique = true, foreignKey = @ForeignKey(name = "FK_CONTRATO_ARRENDATARIO"), nullable = false)
 	private Arrendatario arrendatario;
 
 	@ManyToOne
-	@JoinColumn(name = "CODIGO_PREDIO", foreignKey = @ForeignKey(name = "FK_CONTRATO_PREDIO"), nullable = false)
+	@JoinColumn(name = "CODIGO_PREDIO", unique = true, foreignKey = @ForeignKey(name = "FK_CONTRATO_PREDIO"), nullable = false)
 	private PredioPropietario predioPropietario;
 	
 	/**
