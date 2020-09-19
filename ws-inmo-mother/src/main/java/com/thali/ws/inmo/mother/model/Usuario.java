@@ -10,10 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import lombok.Data;
 
@@ -35,7 +33,6 @@ public class Usuario implements Serializable {
 	private Boolean enabled;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(uniqueConstraints = {@UniqueConstraint(columnNames = {"codigo_usuario", "codigo_role"})})
 	private List<Role> roles;
 	
 	
