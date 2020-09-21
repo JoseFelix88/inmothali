@@ -32,6 +32,13 @@ public class Usuario implements Serializable {
 	
 	private Boolean enabled;
 	
+	private String nombres;
+	
+	private String apellidos;
+	
+	@Column(unique = true)
+	private String email;
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Role> roles;
 	
