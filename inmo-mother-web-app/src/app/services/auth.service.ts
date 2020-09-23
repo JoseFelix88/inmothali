@@ -9,7 +9,7 @@ import { EndPoint } from '../utils/end-point';
 })
 export class AuthService extends EndPoint {
 
-  constructor(private _httpClient: HttpClient) {
+  constructor(private _http: HttpClient) {
     super();
   }
 
@@ -23,7 +23,7 @@ export class AuthService extends EndPoint {
     params.set('grant_type', 'password');
     params.set('username', 'josefelix');
     params.set('password', '456312');
-    return this._httpClient.post<any>(this.token, params, { headers : httpHeaders });
+    return this._http.post<any>(this.token, params, { headers : httpHeaders });
   }
 
 }

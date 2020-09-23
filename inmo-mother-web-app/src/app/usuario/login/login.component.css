@@ -1,0 +1,11 @@
+mat-card {
+    max-width: 400px;
+    margin: 2em auto;
+    text-align: center;
+}
+
+.mat-card-image {
+    width: 20%;
+    height: 10%;
+    background-size: cover;
+}
