@@ -2,10 +2,21 @@ mat-card {
     max-width: 400px;
     margin: 2em auto;
     text-align: center;
+    background-color: #2f4569;
 }
 
 .mat-card-image {
     width: 20%;
     height: 10%;
     background-size: cover;
+}
+
+mat-label, mat-form-field {
+    color: aliceblue;
+}
+
+button {
+    background-color: dodgerblue;
+    color: aliceblue;
+    width: 50%;
 }

@@ -4,19 +4,20 @@
     </mat-card-header>
     <img mat-card-image src="/assets/img/login.png">
     <mat-card-content>
-        <form>
+        <form [formGroup]="formGroupLogin">
             <mat-form-field>
-                <mat-label>Nombre de usuario:</mat-label>
-                <input matInput type="text">
+                <mat-label for="username">Nombre de usuario</mat-label>
+                <input matInput type="text" name="username" formControlName="username">
             </mat-form-field>
             <br>
             <mat-form-field>
-                <mat-label>Contraseña:</mat-label>
-                <input matInput type="password">
+                <mat-label for="password">Contraseña</mat-label>
+                <input matInput type="password" name="password" formControlName="password">
             </mat-form-field>
         </form>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary">Iniciar sesión </button>
+      <button mat-raised-button (click)="login()" [disabled]="formGroupLogin.invalid"
+        class="mb-3">Iniciar sesión</button>
     </mat-card-actions>
   </mat-card>
