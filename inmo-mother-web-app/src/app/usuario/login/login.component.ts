@@ -39,4 +39,14 @@ export class LoginComponent implements OnInit{
     });
   }
 
+
+  public getError(controlName: string): string {
+    let error = '';
+    const control = this.formGroupLogin.get(controlName);
+    if (control.touched && control.errors != null) {
+      error = JSON.stringify(control.errors);
+    }
+    return error;
+  }
+
 }

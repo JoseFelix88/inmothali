@@ -1,11 +1,11 @@
 export class EndPoint {
     
-    private servidor: string = 'http:\\localhost:';
+    private servidor: string = 'http://localhost:';
     private port: string = '8080';
     private versionApi: string = 'v1';
-    private urlBase: string = this.servidor + this.port + '\\api\\' + this.versionApi + '\\inmo\\';
+    private urlBase: string = this.servidor + this.port + '/api/' + this.versionApi + '/inmo/';
 
-    private _token: string = "oauth\\token";
+    private _token: string = "oauth/token";
     private _arrendatario: string = "arrendatario";
     private _propietario: string = "propietario";
     private _contrato: string = "contrato";
