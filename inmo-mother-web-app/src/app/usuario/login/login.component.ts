@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Usuario } from 'src/app/models/usuario';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -8,8 +11,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit{
   public formGroupLogin: FormGroup;
+  usuarioLogin: Usuario;
 
-  constructor(private _formBuildLogin: FormBuilder) { }
+  constructor(private _formBuildLogin: FormBuilder,
+    private _authService: AuthService) { }
   ngOnInit(): void {
     this.buildFormLogin();
   }
@@ -27,7 +32,11 @@ export class LoginComponent implements OnInit{
    * login
    */
   public login() {
-    console.log(this.formGroupLogin.value);
+    const userValueLogin = this.formGroupLogin.value;
+    this.usuarioLogin = new Usuario(userValueLogin.username, userValueLogin.password);
+    this._authService.login(this.usuarioLogin).subscribe(auth => {
+      console.log("Token-auth: " + auth);
+    });
   }
 
 }
