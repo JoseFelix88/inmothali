@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit{
     const userValueLogin = this.formGroupLogin.value;
     this.usuarioLogin = new Usuario(userValueLogin.username, userValueLogin.password);
     this._authService.login(this.usuarioLogin).subscribe(auth => {
-      console.log("Token-auth: " + auth);
+      console.log(auth);
     });
   }
 

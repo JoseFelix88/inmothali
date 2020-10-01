@@ -3,6 +3,8 @@
  */
 package com.thali.ws.inmo.mother.auth;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -55,7 +57,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		cors.setExposedHeaders(endPointConfig.headersHttpRegister());
 		
 		UrlBasedCorsConfigurationSource urlBaseCors = new UrlBasedCorsConfigurationSource();
-		urlBaseCors.registerCorsConfiguration("/**", cors);
+		urlBaseCors.registerCorsConfiguration("/**", cors.applyPermitDefaultValues());
 		return urlBaseCors;
 	}
 	
