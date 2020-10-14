@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -14,7 +16,10 @@ export class LoginComponent implements OnInit{
   usuarioLogin: Usuario;
 
   constructor(private _formBuildLogin: FormBuilder,
-    private _authService: AuthService) { }
+    private _authService: AuthService, 
+    private _router:Router) { }
+
+
   ngOnInit(): void {
     this.buildFormLogin();
   }
@@ -35,7 +40,10 @@ export class LoginComponent implements OnInit{
     const userValueLogin = this.formGroupLogin.value;
     this.usuarioLogin = new Usuario(userValueLogin.username, userValueLogin.password);
     this._authService.login(this.usuarioLogin).subscribe(auth => {
-      console.log(auth);
+      let payLoad = JSON.parse(atob(auth.access_token.split(".")[1]));
+      console.log(payLoad);
+      Swal.fire('LOGIN', 'Hola ' + payLoad.nombre_usuario + ' haz iniciado session.', 'info');
+      this._router.navigate(['/menu']);
     });
   }
 
