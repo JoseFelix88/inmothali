@@ -11,12 +11,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './usuario/login/login.component';
 import { AuthService } from './services/auth.service';
 import { MenuComponent } from './share/menu/menu.component';
+import { NavbarComponent } from './share/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

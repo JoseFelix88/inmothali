@@ -5,17 +5,15 @@ export class EndPoint {
     private versionApi: string = 'v1';
     private urlBase: string = this.servidor + this.port + '/api/' + this.versionApi + '/inmo/';
 
-    private _token: string = "oauth/token";
+    private _urlOauthToken: string = "oauth/token";
     private _arrendatario: string = "arrendatario";
     private _propietario: string = "propietario";
     private _contrato: string = "contrato";
     private _pagocontrato: string = "pagocontrato";
     private _prediopropietario: string = "prediopropietario";
 
-
-
-    get token(): string {
-        return this.urlBase + this._token;
+    get urlOauthToken(): string {
+        return this.urlBase + this._urlOauthToken;
     }
 
     get arrendatario(): string {
@@ -37,7 +35,5 @@ export class EndPoint {
     get prediopropietario(): string {
         return this.urlBase + this._prediopropietario;
     }
-
-    
 
 }

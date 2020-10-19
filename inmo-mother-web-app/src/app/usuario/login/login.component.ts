@@ -22,6 +22,10 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
     this.buildFormLogin();
+    if(this._authService.isAuthenticated()) {
+      Swal.fire('LOGIN', 'Hola ' + this._authService.usuario.nombreUsuario + ' ya estás autenticado!', 'info');
+      this._router.navigate(['/menu']);
+    }
   }
 
   private buildFormLogin() {
@@ -40,9 +44,10 @@ export class LoginComponent implements OnInit{
     const userValueLogin = this.formGroupLogin.value;
     this.usuarioLogin = new Usuario(userValueLogin.username, userValueLogin.password);
     this._authService.login(this.usuarioLogin).subscribe(auth => {
-      let payLoad = JSON.parse(atob(auth.access_token.split(".")[1]));
-      console.log(payLoad);
-      Swal.fire('LOGIN', 'Hola ' + payLoad.nombre_usuario + ' haz iniciado session.', 'info');
+      this._authService.guardarToken(auth.access_token);
+      this._authService.guardarUsuario(auth.access_token);
+      let usuario = this._authService.usuario;
+      Swal.fire('LOGIN', 'Hola ' + usuario.nombreUsuario + ' haz iniciado session.', 'info');
       this._router.navigate(['/menu']);
     });
   }

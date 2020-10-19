@@ -1,0 +1,37 @@
+.card-width {
+    max-width: 400px;
+  }
+  
+  .header-image-arrendatario {
+    background-image: url('/assets/img/icons/cliente.svg');
+    background-size: cover;
+  }
+
+  .header-image-propietario {
+    background-image: url('/assets/img/icons/clientela.svg');
+    background-size: cover;
+  }
+
+  .header-image-contrato {
+    background-image: url('/assets/img/icons/contrato.svg');
+    background-size: cover;
+  }
+  
+  .header-image-pago-contrato {
+    background-image: url('/assets/img/icons/metodo-de-pago.svg');
+    background-size: cover;
+  }
+
+  .header-image-gastos-contrato {
+    background-image: url('/assets/img/icons/egresos.svg');
+    background-size: cover;
+  }
+  
+  .header-image-usuario {
+    background-image: url('/assets/img/icons/usuario.svg');
+    background-size: cover;
+  }
+
+  p {
+      text-align: justify;
+  }

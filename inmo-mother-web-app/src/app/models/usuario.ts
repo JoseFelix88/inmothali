@@ -10,7 +10,8 @@ export class Usuario {
     private _nombre_usuario: string;
     private _jti: string;
     private _password: string;
-    
+    private _roles: string[];
+        
     constructor(username: string, password: string) {
         this._user_name = username;
         this._password = password;
@@ -85,6 +86,13 @@ export class Usuario {
     }
     public set password(value: string) {
         this._password = value;
+    }
+
+    public get roles(): string[] {
+        return this._roles;
+    }
+    public set roles(value: string[]) {
+        this._roles = value;
     }
 
 }
