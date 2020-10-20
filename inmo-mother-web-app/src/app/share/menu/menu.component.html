@@ -1,15 +1,14 @@
 <app-navbar></app-navbar>
 <div class="row m-5">
     <div class="col">
-        <mat-card class="card-width">
+        <mat-card class="card-width"
+                matTooltip="Gestiona los arrendatarios registrados, verifica el estado de los contratos asociados entre otras.">
             <mat-card-header>
                 <div mat-card-avatar class="header-image-arrendatario"></div>
                 <mat-card-title>Arrendatario</mat-card-title>
             </mat-card-header>
             <mat-card-content class="mt-2">
-                <p>
-                  Gestiona los arrendatarios registrados, verifica el estado de los contratos asociados entre otras.
-                </p>
+                <img mat-card-image src="/assets/img/icons/cliente.svg">
             </mat-card-content>
             <mat-card-actions>
                 <button class="w-100" mat-raised-button color="primary">Gestionar</button>
@@ -17,15 +16,14 @@
         </mat-card>
     </div>
     <div class="col">
-        <mat-card class="card-width">
+        <mat-card class="card-width"
+                matTooltip="Gestiona los propietario registrados, verifica el estado de los predios asociados entre otras.">
             <mat-card-header>
                 <div mat-card-avatar class="header-image-propietario"></div>
                 <mat-card-title>Propietario</mat-card-title>
             </mat-card-header>
             <mat-card-content class="mt-2">
-                <p>
-                  Gestiona los propietario registrados, verifica el estado de los predios asociados entre otras.
-                </p>
+                <img mat-card-image src="/assets/img/icons/clientela.svg">
             </mat-card-content>
             <mat-card-actions>
                 <button class="w-100" mat-raised-button color="primary">Gestionar</button>
@@ -33,15 +31,14 @@
         </mat-card>
     </div>
     <div class="col">
-        <mat-card class="card-width">
+        <mat-card class="card-width"
+                matTooltip="Gestiona los contratos registrados, verifica el estado de los mismos entre otras.">
             <mat-card-header>
                 <div mat-card-avatar class="header-image-contrato"></div>
                 <mat-card-title>Contrato</mat-card-title>
             </mat-card-header>
             <mat-card-content class="mt-2">
-                <p>
-                  Gestiona los contratos registrados, verifica el estado de los mismos entre otras.
-                </p>
+                <img mat-card-image src="/assets/img/icons/contrato.svg">
             </mat-card-content>
             <mat-card-actions>
                 <button class="w-100" mat-raised-button color="primary">Gestionar</button>
@@ -49,15 +46,14 @@
         </mat-card>
     </div>
     <div class="col">
-        <mat-card class="card-width">
+        <mat-card class="card-width"
+                matTooltip="Administra, registra los pagos de los contratos registrados, verifica el estado de los mismos entre otras.">
             <mat-card-header>
                 <div mat-card-avatar class="header-image-pago-contrato"></div>
                 <mat-card-title>Pagos contrato</mat-card-title>
             </mat-card-header>
             <mat-card-content class="mt-2">
-                <p>
-                  Administra, registra los pagos de los contratos registrados, verifica el estado de los mismos entre otras.
-                </p>
+                <img mat-card-image src="/assets/img/icons/metodo-de-pago.svg">
             </mat-card-content>
             <mat-card-actions>
                 <button class="w-100" mat-raised-button color="primary">Gestionar</button>
@@ -68,15 +64,14 @@
 
 <div class="row m-5">
     <div class="col">
-        <mat-card class="card-width">
+        <mat-card   class="card-width" 
+                    matTooltip="Administra, registra los gastos de los contratos registrados, verifica el estado de los mismos entre otras.">
             <mat-card-header>
                 <div mat-card-avatar class="header-image-gastos-contrato"></div>
                 <mat-card-title>Gastos contrato</mat-card-title>
             </mat-card-header>
             <mat-card-content class="mt-2">
-                <p>
-                  Administra, registra los gastos de los contratos registrados, verifica el estado de los mismos entre otras.
-                </p>
+                <img mat-card-image src="/assets/img/icons/egresos.svg">
             </mat-card-content>
             <mat-card-actions>
                 <button class="w-100" mat-raised-button color="primary">Gestionar</button>
@@ -84,15 +79,14 @@
         </mat-card>
     </div>
     <div class="col">
-        <mat-card class="card-width">
+        <mat-card   class="card-width" 
+                    matTooltip="Administra los usuarios del sistema siempre y cuando tengas acceso.">
             <mat-card-header>
                 <div mat-card-avatar class="header-image-usuario"></div>
                 <mat-card-title>Usuarios</mat-card-title>
             </mat-card-header>
-            <mat-card-content class="mt-2">
-                <p>
-                  Administra los usuarios del sistema siempre y cuando tengas acceso.
-                </p>
+            <mat-card-content class="mt-2"> 
+                <img mat-card-image src="/assets/img/icons/usuario.svg">
             </mat-card-content>
             <mat-card-actions>
                 <button class="w-100" mat-raised-button color="primary">Gestionar</button>
@@ -100,13 +94,33 @@
         </mat-card>
     </div>
     <div class="col">
-        <mat-card>
-            <mat-card-title>Informes</mat-card-title>
+        <mat-card class="card-width"
+                  matTooltip="Visualiza los informes generados a partir de la información registrada.">
+            <mat-card-header>
+                <div mat-card-avatar class="header-image-informe"></div>
+                <mat-card-title>Informes</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="mt-2"> 
+                <img mat-card-image src="/assets/img/icons/presentacion2.svg" alt="Photo of a Shiba Inu">
+            </mat-card-content>
+            <mat-card-actions>
+                <button class="w-100" mat-raised-button color="primary">Gestionar</button>
+            </mat-card-actions>
         </mat-card>
     </div>
     <div class="col">
-        <mat-card>
-            <mat-card-title>Ayuda</mat-card-title>
+        <mat-card class="card-width"
+                  matTooltip="Acerca de...">
+            <mat-card-header>
+                <div mat-card-avatar class="header-image-help"></div>
+                <mat-card-title></mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="mt-2"> 
+                <img mat-card-image src="/assets/img/icons/acerca-de.svg">
+            </mat-card-content>
+            <mat-card-actions>
+                <button class="w-100" mat-raised-button color="primary">Acerca de...</button>
+            </mat-card-actions>
         </mat-card>
     </div>
 </div>
