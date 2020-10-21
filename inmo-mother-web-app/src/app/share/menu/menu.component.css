@@ -3,12 +3,12 @@
   }
   
   .header-image-arrendatario {
-    background-image: url('/assets/img/icons/cliente.svg');
+    background-image: url('/assets/img/icons/colaboracion.svg');
     background-size: cover;
   }
 
   .header-image-propietario {
-    background-image: url('/assets/img/icons/clientela.svg');
+    background-image: url('/assets/img/icons/jefe.svg');
     background-size: cover;
   }
 
@@ -23,7 +23,7 @@
   }
 
   .header-image-gastos-contrato {
-    background-image: url('/assets/img/icons/egresos.svg');
+    background-image: url('/assets/img/icons/calculador.svg');
     background-size: cover;
   }
   
@@ -33,7 +33,7 @@
   }
   
   .header-image-informe {
-    background-image: url('/assets/img/icons/presentacion2.svg');
+    background-image: url('/assets/img/icons/carta-de-barras.svg');
     background-size: cover;
   }
 
@@ -48,7 +48,18 @@
     margin-left: 30%;
   }
 
+  mat-card-title {
+    color: dodgerblue;
+    text-align: center;
+  }
 
   p {
       text-align: justify;
+  }
+
+  button {
+    background-color: dodgerblue;
+    color: aliceblue;
+    width: 50%;
+    font-size: 13pt;
   }
