@@ -1,5 +1,6 @@
 .card-width {
     max-width: 400px;
+    cursor: pointer;
   }
   
   .header-image-arrendatario {
@@ -44,7 +45,7 @@
   
   .mat-card-image {
     max-width: 7rem;
-    max-height: 7rem;
+    max-height: 15rem;
     margin-left: 30%;
   }
 

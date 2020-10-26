@@ -22,4 +22,8 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
   }
 
+  ir(): void {
+    console.log('ggbncbvcbvcv')
+  }
+
 }

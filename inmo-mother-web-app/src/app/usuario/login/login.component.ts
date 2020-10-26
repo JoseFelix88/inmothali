@@ -23,7 +23,14 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void {
     this.buildFormLogin();
     if(this._authService.isAuthenticated()) {
-      Swal.fire('LOGIN', 'Hola ' + this._authService.usuario.nombreUsuario + ' ya estás autenticado!', 'info');
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title:  'Hola ' + this._authService.usuario.nombreUsuario + ' ya estás autenticado!',
+        showConfirmButton: false,
+        timer: 2000
+      });
+      
       this._router.navigate(['/menu']);
     }
   }
@@ -47,8 +54,18 @@ export class LoginComponent implements OnInit{
       this._authService.guardarToken(auth.access_token);
       this._authService.guardarUsuario(auth.access_token);
       let usuario = this._authService.usuario;
-      Swal.fire('LOGIN', 'Hola ' + usuario.nombreUsuario + ' haz iniciado session.', 'info');
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title:  'Hola ' + usuario.nombreUsuario + ' haz iniciado session.',
+        showConfirmButton: false,
+        timer: 2300
+      });
       this._router.navigate(['/menu']);
+    }, error => {
+      if(error.status == 400) {
+        Swal.fire('ACCESO DENEGADO', 'Usuario o contraseña incorrectas!', 'error');
+      }
     });
   }
 

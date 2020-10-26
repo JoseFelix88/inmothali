@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { Usuario } from '../models/usuario';
@@ -16,7 +17,7 @@ export class AuthService {
   private _usuario: Usuario;
   private _token: string;
   
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient, private _router: Router) {
   }
 
   login(usuariologin: Usuario): Observable<any> {
@@ -85,5 +86,24 @@ export class AuthService {
     return false;
   }
 
+  cerrarSession(): void {
+    this._token = null;
+    this._usuario = null;
+    sessionStorage.clear();
+  }
+
+  private isNoAutorizado(e): boolean {
+    if(e.status == 401) {
+      this._router.navigate(['/login']);
+      return true;
+    }
+
+    if(e.status == 403) {
+      this._router.navigate(['/menu']);
+      return true;
+    }
+
+    return false;
+  }
 
 }

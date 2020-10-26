@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-//import { AuthService } from 'src/app/services/auth.service';
+import { from } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -10,11 +12,21 @@ export class NavbarComponent implements OnInit {
 
   nombreUsuarioLogin: string = "Jose Felix Curiel";
   
-  constructor() {
-    //this.nombreUsuarioLogin = _authService.usuario.nombreUsuario;
+  constructor(private _authService: AuthService) {
+      this.nombreUsuarioLogin = _authService.usuario.nombreUsuario;
    }
 
   ngOnInit() {
   }
-
+  
+  cerrarSession(): void {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title:  this.nombreUsuarioLogin + ' haz cerrado sesión correctamente.',
+      showConfirmButton: false,
+      timer: 1500
+    });
+    this._authService.cerrarSession();
+  }
 }
