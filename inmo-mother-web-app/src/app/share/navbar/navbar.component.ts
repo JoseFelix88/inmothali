@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { Notificacion } from 'src/app/utils/notificacion';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,13 +21,7 @@ export class NavbarComponent implements OnInit {
   }
   
   cerrarSession(): void {
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title:  this.nombreUsuarioLogin + ' haz cerrado sesión correctamente.',
-      showConfirmButton: false,
-      timer: 1500
-    });
+    Notificacion.showNotifyTypeSuccess(this.nombreUsuarioLogin + ' haz cerrado sesión correctamente.');
     this._authService.cerrarSession();
   }
 }

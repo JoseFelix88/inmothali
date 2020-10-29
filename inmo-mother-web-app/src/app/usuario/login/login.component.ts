@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
+import { Notificacion } from 'src/app/utils/notificacion';
 import Swal from 'sweetalert2';
 
 
@@ -11,9 +12,10 @@ import Swal from 'sweetalert2';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   public formGroupLogin: FormGroup;
   usuarioLogin: Usuario;
+  notify: Notificacion = new Notificacion();
 
   constructor(private _formBuildLogin: FormBuilder,
     private _authService: AuthService, 
@@ -23,14 +25,7 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void {
     this.buildFormLogin();
     if(this._authService.isAuthenticated()) {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title:  'Hola ' + this._authService.usuario.nombreUsuario + ' ya estás autenticado!',
-        showConfirmButton: false,
-        timer: 2000
-      });
-      
+      Notificacion.showNotifyTypeSuccess('Hola ' + this._authService.usuario.nombreUsuario + ' ya estás autenticado!');
       this._router.navigate(['/menu']);
     }
   }
@@ -53,14 +48,7 @@ export class LoginComponent implements OnInit{
     this._authService.login(this.usuarioLogin).subscribe(auth => {
       this._authService.guardarToken(auth.access_token);
       this._authService.guardarUsuario(auth.access_token);
-      let usuario = this._authService.usuario;
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title:  'Hola ' + usuario.nombreUsuario + ' haz iniciado session.',
-        showConfirmButton: false,
-        timer: 2300
-      });
+      Notificacion.showNotifyTypeSuccess('Hola ' + this._authService.usuario.nombreUsuario + ' haz iniciado session.');
       this._router.navigate(['/menu']);
     }, error => {
       if(error.status == 400) {

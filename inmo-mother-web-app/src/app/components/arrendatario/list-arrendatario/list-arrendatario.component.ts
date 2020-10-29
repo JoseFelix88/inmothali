@@ -26,6 +26,12 @@ const NAMES: string[] = [
   styleUrls: ['./list-arrendatario.component.css']
 })
 export class ListArrendatarioComponent implements AfterViewInit  {
+  public list_productos: any[] = []
+  private lstProductsTemp: any[] = [];
+
+  public flagLoading: boolean;
+  public messangeError: string;
+
   displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
   dataSource: MatTableDataSource<UserData>;
 
