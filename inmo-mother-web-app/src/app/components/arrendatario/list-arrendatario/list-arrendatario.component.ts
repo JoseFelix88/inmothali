@@ -1,7 +1,11 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { Arrendatario } from 'src/app/models/arrendatario';
+import { ArrendatarioService } from 'src/app/services/arrendatario.service';
+import { Notificacion } from 'src/app/utils/notificacion';
+import Swal from 'sweetalert2';
 
 export interface UserData {
   id: string;
@@ -25,31 +29,47 @@ const NAMES: string[] = [
   templateUrl: './list-arrendatario.component.html',
   styleUrls: ['./list-arrendatario.component.css']
 })
-export class ListArrendatarioComponent implements AfterViewInit  {
-  public list_productos: any[] = []
-  private lstProductsTemp: any[] = [];
-
+export class ListArrendatarioComponent implements OnInit  {
+  public listArrendatarios: any[] = []
+  
   public flagLoading: boolean;
   public messangeError: string;
 
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
-  dataSource: MatTableDataSource<UserData>;
+  displayedColumns: string[] = ['numeroDocumento', 
+              'nombreApellido', 
+              'tipoDocumento',
+              'tipoPersona',
+              'estadoContrato'];
+  dataSource: MatTableDataSource<Arrendatario>;
 
-  paginator: MatPaginator;
-  sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort , {static: true}) sort: MatSort;
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+  constructor(private _arrendatarioService: ArrendatarioService) { 
+    this.flagLoading = true;
+   }
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  ngOnInit(): void {
+    this._arrendatarioService.listarArrendatarios().subscribe(
+      listData => {
+          this.dataSource.data = listData;
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+          this.flagLoading = false;
+      }, error => {
+        this.flagLoading = false;
+        if (error.ok === false && error.status === 0) {
+          let messange = new String(`No se pudo establecer conexión con el servidor.
+          El servicio no se encuentra disponible.`);
+          this.messangeError = messange.concat(`El error presentado es el siguiente: ${error.message}`);
+        } else {
+          this.messangeError = `Se presento el siguiente error: ${error.message}`;
+        }
+        Swal.fire('ERROR', this.messangeError, 'error');
+      });
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+  
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -59,18 +79,4 @@ export class ListArrendatarioComponent implements AfterViewInit  {
       this.dataSource.paginator.firstPage();
     }
   }
-}
-
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
-
 }
