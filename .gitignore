@@ -10,3 +10,11 @@ ws-inmo-mother/.mvn/wrapper/maven-wrapper.jar
 ws-inmo-mother/.mvn/wrapper/maven-wrapper.jar
 ws-inmo-mother/.gitignore
 .gitignore
+ws-inmo-mother/.settings/org.eclipse.core.resources.prefs
+ws-inmo-mother/.classpath
+*.class
+*.original
+ws-inmo-mother/.project
+*.prefs
+*.xml
+*.lst
