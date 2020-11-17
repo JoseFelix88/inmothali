@@ -15,10 +15,10 @@ public enum TipoPersonaEnum {
 	NATURAL		(1, "Natural", "PN");
 	
 	/** The codigo. */
-	private Integer codigo;
+	private final Integer codigo;
 	
 	/** The nombre. */
-	private String nombre;
+	private final String nombre;
 	
 	/** The sigla. */
 	private String sigla;
@@ -29,7 +29,7 @@ public enum TipoPersonaEnum {
 	 * @param codigo the codigo
 	 * @param nombre the nombre
 	 */
-	private TipoPersonaEnum(Integer codigo, String nombre) {
+	TipoPersonaEnum(Integer codigo, String nombre) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 	}
@@ -41,7 +41,7 @@ public enum TipoPersonaEnum {
 	 * @param nombre the nombre
 	 * @param sigla the sigla
 	 */
-	private TipoPersonaEnum(Integer codigo, String nombre, String sigla) {
+	TipoPersonaEnum(Integer codigo, String nombre, String sigla) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.sigla = sigla;

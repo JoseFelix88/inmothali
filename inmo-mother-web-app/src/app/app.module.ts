@@ -13,6 +13,9 @@ import { AuthService } from './services/auth.service';
 import { MenuComponent } from './share/menu/menu.component';
 import { NavbarComponent } from './share/navbar/navbar.component';
 import { ListArrendatarioComponent } from './components/arrendatario/list-arrendatario/list-arrendatario.component';
+import { LoadingComponent } from './share/loading/loading.component';
+import { AddEditArrendatarioComponent } from './components/arrendatario/add-edit-arrendatario/add-edit-arrendatario.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import { ListArrendatarioComponent } from './components/arrendatario/list-arrend
     LoginComponent,
     MenuComponent,
     NavbarComponent,
-    ListArrendatarioComponent
+    ListArrendatarioComponent,
+    LoadingComponent,
+    AddEditArrendatarioComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,10 @@ import { ListArrendatarioComponent } from './components/arrendatario/list-arrend
     SweetAlert2Module,
     routing
   ],
-  providers: [AuthService],
+  providers: [AuthService, {
+    provide: MatDialogRef,
+    useValue: {}
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

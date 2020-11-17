@@ -1,62 +1,50 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatPaginatorIntl, PageEvent} from '@angular/material';
 import { Arrendatario } from 'src/app/models/arrendatario';
 import { ArrendatarioService } from 'src/app/services/arrendatario.service';
-import { Notificacion } from 'src/app/utils/notificacion';
 import Swal from 'sweetalert2';
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
-}
-
-/** Constants used to fill up our data base. */
-const COLORS: string[] = [
-  'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-  'aqua', 'blue', 'navy', 'black', 'gray'
-];
-const NAMES: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
-];
+import { AddEditArrendatarioComponent } from '../add-edit-arrendatario/add-edit-arrendatario.component';
 
 @Component({
   selector: 'app-list-arrendatario',
   templateUrl: './list-arrendatario.component.html',
   styleUrls: ['./list-arrendatario.component.css']
 })
-export class ListArrendatarioComponent implements OnInit  {
-  public listArrendatarios: any[] = []
-  
+export class ListArrendatarioComponent implements OnInit {
+  public listArrendatarios: Arrendatario[] = []
+  totalRegistros = 0;
+  paginaActual = 0;
+  totalPorPagina = 5;
+  pageSizeOptions: number[] = [3, 5, 10, 25, 100];
   public flagLoading: boolean;
   public messangeError: string;
 
-  displayedColumns: string[] = ['numeroDocumento', 
-              'nombreApellido', 
-              'tipoDocumento',
-              'tipoPersona',
-              'estadoContrato'];
-  dataSource: MatTableDataSource<Arrendatario>;
-
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort , {static: true}) sort: MatSort;
-
-  constructor(private _arrendatarioService: ArrendatarioService) { 
+  constructor(private _arrendatarioService: ArrendatarioService,
+              private paginatorIntl: MatPaginatorIntl,
+              private _matDialog: MatDialog) { 
     this.flagLoading = true;
+    this.paginatorIntl.itemsPerPageLabel = "Items por página";
    }
-
+  
   ngOnInit(): void {
-    this._arrendatarioService.listarArrendatarios().subscribe(
-      listData => {
-          this.dataSource.data = listData;
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-          this.flagLoading = false;
+      this.listarArrendatarios();
+  }
+
+  paginar(event: PageEvent): void {
+    this.paginaActual = event.pageIndex;
+    this.totalPorPagina = event.pageSize;
+    this.listarArrendatarios();
+  }
+  private listarArrendatarios(){
+    this._arrendatarioService.listarArrendatariosPaginados(this.paginaActual.toString(), this.totalPorPagina.toString()).subscribe(
+      arrendatarios => {
+        this.listArrendatarios =  arrendatarios._embedded['arrendatarios'] as Arrendatario[];
+        console.log(this.listArrendatarios);
+        this.totalRegistros = arrendatarios.page.totalElements as number;
+        this.flagLoading = false;
+        console.log('encontro arrendatarios');
       }, error => {
+        console.log('No encontro arrendatarios. Error:  ' + error);
         this.flagLoading = false;
         if (error.ok === false && error.status === 0) {
           let messange = new String(`No se pudo establecer conexión con el servidor.
@@ -69,14 +57,28 @@ export class ListArrendatarioComponent implements OnInit  {
       });
   }
 
-  
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
+    let listArrendatarioFilter = this.listArrendatarios;
+    console.log(listArrendatarioFilter);
+    
+    /*this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
-    }
+    }*/
   }
+
+  openDialogCrearCliente(): void {
+    const dialogRef = this._matDialog.open(AddEditArrendatarioComponent, {
+       width: '650px',
+       height:'600px'
+     });
+ 
+     dialogRef.afterClosed().subscribe(result => {
+       if(result != null){
+         this.ngOnInit();
+       }
+      });
+   }
+
 }

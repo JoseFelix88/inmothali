@@ -1,47 +1,94 @@
 <app-navbar></app-navbar>
-<div class="container">
-    <h1>Example heading <span class="badge badge-secondary">New</span></h1>
+<app-loading *ngIf="flagLoading"></app-loading>
+<div class="container animated fadeIn"  *ngIf="!flagLoading">
+    <h1 class="text-center"> <span class="badge badge-secondary">Arrendatarios Registrados</span></h1>
+    <button class="btn btn-primary my-2 w-25 mb-3" routerLink="/add-arrendatario">Crear Arrendatario</button>
     <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-      </mat-form-field>
-      
+        <mat-label>Buscar Arrendatario</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar Arrendatarios..." #input>
+    </mat-form-field>
       <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort>
+        <table  class="table table-hover table-striped" *ngIf="listArrendatarios?.length>0">
+          <thead>
+              <tr>
+                  <th>Código</th>
+                  <th>Número de Identificación</th>
+                  <th>Nombre Completo</th>
+                  <th>Correo Electronico</th>
+                  <th>Tipo Persona</th>
+                  <th>Direcciones</th>
+                  <th>Telefonos</th>
+                  <th>editar</th>
+                  <th>eliminar</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let arrendatario of listArrendatarios">
+                  <td>{{arrendatario.codigoArrendatario}}</td>
+                  <td>{{arrendatario.numeroDocumento}}</td>
+                  <td>{{arrendatario.nombreCompleto}}</td>
+                  <td>{{arrendatario.correoElectronico}}</td>
+                  <td>{{ arrendatario.tipoPersona }}</td>
+                  <td><button class="btn btn-secondary btn-sm" 
+                      [routerLink]="['/arrendatarios/form', arrendatario.id]">
+                      Direcciones
+                    </button>
+                  </td>
+                  <td><button class="btn btn-secondary btn-sm" 
+                      [routerLink]="['/arrendatarios/form', arrendatario.id]">
+                      Telefonos
+                    </button>
+                  </td>
+                  <td><button class="btn btn-secondary btn-sm" 
+                      [routerLink]="['/arrendatarios/form', arrendatario.id]">
+                      editar
+                  </button></td>
+                  <td><button class="btn btn-danger btn-sm" 
+                      (click)="eliminar(arrendatario)">
+                      eliminar
+                  </button></td>
+              </tr>
+          </tbody>
+        </table>
+        <mat-paginator [length]="totalRegistros"
+              [pageSize]="totalPorPagina"
+              [pageIndex]="paginaActual"
+              [pageSizeOptions]="pageSizeOptions"
+              (page) ="paginar($event)"
+              showFirstLastButtons
+              class="float-left mx-2">
+        </mat-paginator>
+
+       <!-- <table mat-table [dataSource]="dataSource" matSort>
       
-          <!-- ID Column -->
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+          <ng-container matColumnDef="numeroDocumento">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Número de Documento </th>
+            <td mat-cell *matCellDef="let arrendatarios"> {{ arrendatarios.numeroDocumento }} </td>
           </ng-container>
       
-          <!-- Progress Column -->
-          <ng-container matColumnDef="progress">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
-            <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+          <ng-container matColumnDef="nombreCompleto">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre o Razón social </th>
+            <td mat-cell *matCellDef="let arrendatarios"> {{ arrendatarios.nombreCompleto }} </td>
           </ng-container>
       
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-            <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+          <ng-container matColumnDef="tipoDocumento">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de Documento </th>
+            <td mat-cell *matCellDef="let arrendatarios"> {{ arrendatarios.tipoDocumento }} </td>
           </ng-container>
       
-          <!-- Color Column -->
-          <ng-container matColumnDef="color">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
-            <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+          <ng-container matColumnDef="tipoPersona">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Persona </th>
+            <td mat-cell *matCellDef="let arrendatarios"> {{ arrendatarios.tipoPersona }} </td>
           </ng-container>
-      
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      
-          <!-- Row shown when there is no matching data. -->
+          
+           Row shown when there is no matching data. 
           <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            <td class="mat-cell" colspan="4">No se encontraron resultados "{{input.value}}"</td>
           </tr>
-        </table>
+        </table>  -->
       
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
       </div>
 </div>

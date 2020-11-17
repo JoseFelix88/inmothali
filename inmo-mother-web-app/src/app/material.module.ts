@@ -9,6 +9,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatRadioModule} from '@angular/material/radio';
 
 import {MatFormFieldModule,
         MatInputModule,
@@ -21,7 +22,7 @@ import {MatFormFieldModule,
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,
-        MatSnackBarModule
+        MatSnackBarModule,
 } from '@angular/material';
 
 
@@ -47,7 +48,9 @@ import {MatFormFieldModule,
         MatSidenavModule,
         MatMenuModule,
         MatTooltipModule,
-        MatDividerModule
+        MatDividerModule,
+        MatRadioModule
+        
     ],
     exports:[
         MatFormFieldModule,
@@ -68,7 +71,8 @@ import {MatFormFieldModule,
         MatSidenavModule,
         MatMenuModule,
         MatTooltipModule,
-        MatDividerModule
+        MatDividerModule,
+        MatRadioModule
     ]
 })
 

@@ -13,6 +13,6 @@ import com.thali.ws.inmo.mother.model.Usuario;
  */
 public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, Integer> {
 
-	public Usuario findByUserName(String userName);
+	Usuario findByUserName(String userName);
 	
 }

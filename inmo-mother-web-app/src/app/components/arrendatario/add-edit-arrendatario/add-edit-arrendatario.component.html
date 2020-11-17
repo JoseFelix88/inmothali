@@ -1,0 +1,109 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <div class="col-11">
+        <h2 mat-dialog-title>{{ titleModal }}</h2>
+      </div>
+      <div class="col">
+        <a type="button" (click) = "_dialogRef.close(false)">X
+        </a>
+      </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+<form [formGroup]="formGroupArrendatario" class="example-form" >
+    <mat-dialog-content>
+      <mat-tab-group>
+        <mat-tab  label="Datos Arrendatario">
+          <mat-grid-list cols="2" rowHeight="2:1">
+
+            <input name="codigoArrendatario" formControlName="codigoArrendatario" type="hidden">
+
+            <mat-grid-tile>
+              
+                <mat-radio-group aria-label="Select an option" name="tipoPersona" formControlName="tipoPersona">
+                  <mat-radio-button value="NATURAL">Natural</mat-radio-button>
+                  <mat-radio-button value="JURIDICA">Juridica</mat-radio-button>
+                </mat-radio-group>
+                <mat-error>Seleccione el tipo de persona.</mat-error>
+              
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <mat-form-field class="example-full-width">
+                <input  matInput name="numeroDocumento" formControlName="numeroDocumento"
+                        placeholder="Número de Identificación" type="text" id="textnumeroidentificacion">
+                <mat-error>Ingrese el número de identificación.</mat-error>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              
+                <mat-select name="tipoDocumento" formControlName="tipoDocumento">
+                  <mat-option *ngFor="let tipoDoc of listTipoDocumento" [value]="tipoDoc.value">
+                    {{tipoDoc.viewValue}}
+                  </mat-option>
+                </mat-select>
+                <mat-error>Seleccione el tipo de identificación.</mat-error>
+              
+            </mat-grid-tile>
+
+            <div *ngIf="!isPersonaNatural">
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <input  matInput name="razonSocial" formControlName="razonSocial"
+                          placeholder="Razón Social" id="textRazonSocial">
+                   <mat-error>Ingrese la razón social.</mat-error>
+                </mat-form-field>
+              </mat-grid-tile>
+            </div>
+
+            <div *ngIf="isPersonaNatural">
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <input  matInput name="primerApellido" formControlName="primerApellido" placeholder="Primer Apellido" id="textPrimerApe">
+                  <mat-error>Ingrese el primer apellido.</mat-error>
+                </mat-form-field>
+              </mat-grid-tile>
+
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <input  matInput name="segundoApellido" formControlName="segundoApellido" placeholder="Segundo Apellido" id="textSegundoApe">
+                </mat-form-field>
+              </mat-grid-tile>
+
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <input  matInput name="primerNombre" formControlName="primerNombre" placeholder="Primer Nombre" id="textPrimerNom">
+                  <mat-error>Ingrese el primer nombre.</mat-error>
+                </mat-form-field>
+              </mat-grid-tile>
+
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width">
+                  <input  matInput name="segundoNombre" formControlName="segundoNombre" placeholder="Segundo Nombre" id="textSegundoNom">
+                </mat-form-field>
+              </mat-grid-tile>
+            </div>
+            
+            <mat-grid-tile>
+              <mat-form-field class="example-full-width">
+                <input  matInput name="correoElectronico" formControlName="correoElectronico" placeholder="Correo Electronico" id="textcorreoElectronico" type="email">
+                <mat-error>Ingrese el correo electronico.</mat-error>
+              </mat-form-field>
+            </mat-grid-tile>
+        
+        </mat-grid-list>
+          <div class="col">
+              <div mat-dialog-actions>
+                  <button mat-raised-button color="primary" (click)="formGroupArrendatario.reset()">Nuevo</button>
+              </div>
+          </div>
+          <div class="col">
+              <div mat-dialog-actions>
+                  <button mat-raised-button color="primary" (click)="guardarArrendatario()"
+                          [disabled]="formGroupArrendatario.invalid"> Guardar</button>
+              </div>
+          </div>
+        </mat-tab>
+    </mat-tab-group>
+  </mat-dialog-content>
+</form>

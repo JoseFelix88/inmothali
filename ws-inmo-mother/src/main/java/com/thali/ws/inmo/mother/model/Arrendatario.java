@@ -17,6 +17,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.util.ObjectUtils;
 
 import com.thali.ws.inmo.mother.util.enums.TipoPersonaEnum;
 
@@ -58,20 +61,35 @@ public class Arrendatario implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "TIPO_PERSONA")
-	private TipoPersonaEnum tipoPersonaEnum;
-	
+	private TipoPersonaEnum tipoPersona;
+
 	@Column(name = "TIPO_DOCUMENTO", length = 60)
 	private String tipoDocumento;
-	
+
 	@Column(name = "CORREO_ELECTRONICO", length = 60)
 	private String correoElectronico;
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="arrendatario", cascade=CascadeType.ALL)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "arrendatario", cascade = CascadeType.ALL)
 	private List<DireccionArrendatario> direcciones;
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="arrendatario", cascade=CascadeType.ALL)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "arrendatario", cascade = CascadeType.ALL)
 	private List<TelefonoArrendatario> telefonos;
 
+	@Transient
+	private String nombreCompleto;
+
+	public String getNombreCompleto() {
+		String nc = "";
+		if(tipoPersona == TipoPersonaEnum.NATURAL) {
+			nc += (ObjectUtils.isEmpty(primerApellido)) ? "" : primerApellido + " ";
+			nc += (ObjectUtils.isEmpty(segundoApellido)) ? "" : segundoApellido + " ";
+			nc += (ObjectUtils.isEmpty(primerNombre)) ? "" : primerNombre + " ";
+			nc += (ObjectUtils.isEmpty(segundoNombre)) ? "" : segundoNombre + " ";
+		} else {
+			nc = (ObjectUtils.isEmpty(this.razonSocial)) ? "": this.razonSocial;
+		}
+		return nc.trim();
+	}
 
 	/**
 	 * 

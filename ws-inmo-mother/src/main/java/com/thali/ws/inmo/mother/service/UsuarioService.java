@@ -11,5 +11,5 @@ import com.thali.ws.inmo.mother.model.Usuario;
  */
 public interface UsuarioService {
 
-	public Usuario findByUserName(String userName);
+	Usuario findByUserName(String userName);
 }
